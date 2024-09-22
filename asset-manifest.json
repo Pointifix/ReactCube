@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ReactCube/static/css/main.53d1648a.css",
+    "main.js": "/ReactCube/static/js/main.5d3ea33c.js",
+    "static/js/453.ef342bb7.chunk.js": "/ReactCube/static/js/453.ef342bb7.chunk.js",
+    "index.html": "/ReactCube/index.html",
+    "main.53d1648a.css.map": "/ReactCube/static/css/main.53d1648a.css.map",
+    "main.5d3ea33c.js.map": "/ReactCube/static/js/main.5d3ea33c.js.map",
+    "453.ef342bb7.chunk.js.map": "/ReactCube/static/js/453.ef342bb7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.53d1648a.css",
+    "static/js/main.5d3ea33c.js"
+  ]
+}
