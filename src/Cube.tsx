@@ -8,6 +8,7 @@ const Cube: React.FC = () => {
     const cubeRef = useRef<THREE.Mesh | null>(null);
     const rotationDirectionRef = useRef<THREE.Vector2>(new THREE.Vector2(0, 0));
     const colorRef = useRef<string>("#ffffff");
+    const mouseDownRef = useRef<boolean>(false);
 
     const rotationSpeedMultiplier: number = 0.02;
 
@@ -57,7 +58,7 @@ const Cube: React.FC = () => {
         animate();
 
         const handleResize = () => {
-            const { clientWidth, clientHeight } = currentCanvasWrapper;
+            const {clientWidth, clientHeight} = currentCanvasWrapper;
             camera.aspect = clientWidth / clientHeight;
             camera.updateProjectionMatrix();
 
@@ -84,10 +85,29 @@ const Cube: React.FC = () => {
         rotationDirectionRef.current[newRotationDirection.axis] = newRotationDirection.speed;
     };
 
+    const handleMouseDown = () => {
+        mouseDownRef.current = true;
+    };
+    const handleMouseUp = () => {
+        mouseDownRef.current = false;
+        rotationDirectionRef.current.set(0, 0);
+    };
+    const handleMouseMove = (e: React.MouseEvent) => {
+        if (mouseDownRef.current) {
+            // x/y are flipped here because of the coordinate system difference between screen and world space
+            rotationDirectionRef.current.x = e.movementY * rotationSpeedMultiplier * 2;
+            rotationDirectionRef.current.y = e.movementX * rotationSpeedMultiplier * 2;
+        }
+    };
+
     return (
         <div>
             <div id="canvasWrapper"
-                ref={canvasWrapperRef}
+                 ref={canvasWrapperRef}
+                 onMouseDown={handleMouseDown}
+                 onMouseUp={handleMouseUp}
+                 onMouseMove={handleMouseMove}
+                 onMouseLeave={handleMouseUp}
             />
             <Inputs
                 color={colorRef.current}
